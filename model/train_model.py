@@ -24,7 +24,7 @@ def train_model():
 
     # Train model
     # model = DecisionTreeClassifier()
-    model = RandomForestClassifier()
+    model = RandomForestClassifier(n_estimators=100, random_state=42)
     # model = GaussianNB()
     model.fit(X_train_scaled, y_train)
 
