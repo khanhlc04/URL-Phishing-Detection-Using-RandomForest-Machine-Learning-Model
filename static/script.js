@@ -4,13 +4,13 @@ function checkURL() {
     let explanationElement = document.getElementById("explanation");
 
     if (!url) {
-        resultElement.innerHTML = "Please enter a URL.";
+        resultElement.innerHTML = "Vui lòng nhập URL.";
         explanationElement.innerHTML = "";
         return;
     }
 
-    // Show loading animation
-    resultElement.innerHTML = "Checking... <span class='loading'></span>";
+    // Hiển thị trạng thái kiểm tra
+    resultElement.innerHTML = "Đang kiểm tra... <span class='loading'></span>";
     explanationElement.innerHTML = "";
 
     fetch("/predict", {
@@ -21,18 +21,20 @@ function checkURL() {
     .then(response => response.json())
     .then(data => {
         if (data.error) {
-            resultElement.innerHTML = "Error: " + data.error;
+            resultElement.innerHTML = "Lỗi: " + data.error;
             explanationElement.innerHTML = "";
         } else {
-            resultElement.innerHTML = `<strong>Result:</strong> <span style="color: ${data.prediction === "Phishing" ? "red" : "green"}">${data.prediction}</span>`;
-            
-            let explanationText = data.reasons ? data.reasons.map(reason => `• ${reason}`).join("<br>") : "No explanation available.";
-            explanationElement.innerHTML = `<strong>Why?</strong><br>${explanationText}`;
+            let color = data.prediction === "Phishing" ? "red" : "green";
+            let viPrediction = data.prediction === "Phishing" ? "Lừa đảo" : "An toàn";
+            resultElement.innerHTML = `<strong>Kết quả:</strong> <span style=\"color: ${color}\">${viPrediction}</span>`;
+
+            let explanationText = data.reasons ? data.reasons.map(reason => `• ${reason}`).join("<br>") : "Không có giải thích.";
+            explanationElement.innerHTML = `<strong>Giải thích:</strong><br>${explanationText}`;
         }
     })
     .catch(error => {
-        resultElement.innerHTML = "Error checking URL.";
+        resultElement.innerHTML = "Có lỗi khi kiểm tra URL.";
         explanationElement.innerHTML = "";
-        console.error("Error:", error);
+        console.error("Lỗi:", error);
     });
 }

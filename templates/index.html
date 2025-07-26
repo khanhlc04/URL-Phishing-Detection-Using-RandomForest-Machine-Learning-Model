@@ -8,15 +8,15 @@
 </head>
 <body>
     <div class="container">
-        <h1>Phishing URL Detector</h1>
-        <input type="text" id="urlInput" placeholder="Enter URL">
-        <button onclick="checkURL()">Check</button>
+        <h1>Kiểm tra URL lừa đảo</h1>
+        <input type="text" id="urlInput" placeholder="Nhập URL cần kiểm tra">
+        <button onclick="checkURL()">Kiểm tra</button>
         <p id="description">
-            This tool analyzes the given URL and provides a prediction on whether it is phishing or safe. 
-            However, it does not guarantee 100% accuracy. Always verify manually if needed.
+            Công cụ này sẽ phân tích URL bạn nhập và dự đoán xem đó có phải là lừa đảo hay an toàn. 
+            Tuy nhiên, kết quả chỉ mang tính tham khảo, bạn nên kiểm tra lại thủ công nếu cần thiết.
         </p>        
         <p id="result"></p>
-        <p id="explanation"></p> <!-- This will display the explanation -->
+        <p id="explanation"></p> <!-- Hiển thị giải thích chi tiết -->
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
